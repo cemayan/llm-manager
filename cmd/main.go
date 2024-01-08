@@ -2,13 +2,11 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"git-observer/api/server"
-	"git-observer/api/types"
-	"git-observer/api/util"
 	"git-observer/internal/backend"
+	"git-observer/internal/cli"
 	"git-observer/internal/config"
 	"git-observer/internal/log"
 	"github.com/spf13/cobra"
@@ -50,48 +48,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if prompt != "" {
-
-		switch config.AppConfig.Config.Api.Backend {
-		case "ollama":
-			query, err := backend.BackendInstance.
-				Query(util.PrepareOllamaRequest(config.AppConfig.Config.Ollama.Model, prompt).Marshall(), nil)
-			if err != nil {
-				fmt.Println(string(util.PrepareErrorResponse(err, 1003).Marshall()))
-				return
-			}
-
-			var ollamaResp types.OllamaResponse
-			err = json.Unmarshal(query, &ollamaResp)
-
-			if err != nil {
-				fmt.Println(string(util.PrepareErrorResponse(err, 1001).Marshall()))
-				return
-			}
-
-			fmt.Println(string(util.PrepareResponse(ollamaResp.Response).Marshall()))
-		case "lingoose":
-			query, err := backend.BackendInstance.
-				Query([]byte(prompt), nil)
-			if err != nil {
-				fmt.Println(string(util.PrepareErrorResponse(err, 1003).Marshall()))
-				return
-			}
-
-			fmt.Println(string(util.PrepareResponse(query).Marshall()))
-		case "langchaingo":
-			query, err := backend.BackendInstance.
-				Query([]byte(prompt), nil)
-			if err != nil {
-				fmt.Println(string(util.PrepareErrorResponse(err, 1003).Marshall()))
-				return
-			}
-
-			fmt.Println(string(util.PrepareResponse(query).Marshall()))
-		}
-
-		return
-	}
+	cli.Exec(prompt)
 
 	server.HttpServer.ConfigureMux()
 
