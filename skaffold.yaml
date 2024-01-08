@@ -1,0 +1,17 @@
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: git-observer
+build:
+  artifacts:
+    - image: build
+      context: .
+      docker:
+        dockerfile: build/Dockerfile
+manifests:
+  rawYaml:
+    - deployment/api/deployment.yaml
+portForward:
+  - resourceType: service
+    resourceName: build
+    port: 8996

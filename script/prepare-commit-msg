@@ -1,0 +1,18 @@
+#!/bin/sh
+
+NAME=$(git branch | grep '*' | sed 's/* //')
+
+response=$(curl -s  'http://localhost:8996/api/v1/commit' \
+--header 'Content-Type: application/json' \
+--data '{
+    "message": "You are a developer and your responsible is fix the commit message. You can check the guidline here https://wiki.openstack.org/wiki/GitCommitMessages#Information_in_commit_messages. Can you fix '"$(cat "$1")"'"
+}' | jq '.data.response')
+
+DESCRIPTION=$response
+
+echo "$NAME"': '$(cat "$1") > "$1"
+if [ -n "$DESCRIPTION" ]
+then
+   echo "" >> "$1"
+   echo $DESCRIPTION >> "$1"
+fi
