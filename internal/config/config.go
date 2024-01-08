@@ -23,7 +23,7 @@ func configureParameters() *structs.Config {
 	if val, ok := os.LookupEnv("LLM_BACKEND"); ok {
 		cfg.Api.Backend = val
 	} else {
-		cfg.Api.Backend = "ollama"
+		log.Fatalln("LLM_BACKEND must be set!")
 	}
 
 	if val, ok := os.LookupEnv("BACKEND_ENV"); ok {

@@ -23,5 +23,5 @@ func (l Langchaingo) Query(body []byte, params map[string]interface{}) ([]byte, 
 
 func New() *Langchaingo {
 	llm, _ := openAi2.New()
-	return &Langchaingo{llm: llm}
+	return &Langchaingo{llm: llm, temp: 0.7}
 }

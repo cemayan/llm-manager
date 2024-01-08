@@ -27,9 +27,19 @@ func (h *handler) QueryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	resp, err := h.backend.Query(
-		util.PrepareOllamaRequest(config.AppConfig.Config.Ollama.Model, payload.Message).Marshall(),
-		nil)
+
+	var body []byte
+
+	switch config.AppConfig.Config.Api.Backend {
+	case "ollama":
+		body = util.PrepareOllamaRequest(config.AppConfig.Config.Ollama.Model, payload.Prompt).Marshall()
+	case "langchaingo":
+		body = []byte(payload.Prompt)
+	case "lingoose":
+		body = []byte(payload.Prompt)
+	}
+
+	resp, err := h.backend.Query(body, nil)
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -39,6 +49,7 @@ func (h *handler) QueryHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch config.AppConfig.Config.Api.Backend {
 	case "ollama":
+
 		var ollamaResp types.OllamaResponse
 		err = json.Unmarshal(resp, &ollamaResp)
 		if err != nil {
@@ -53,9 +64,11 @@ func (h *handler) QueryHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write(util.PrepareResponse(ollamaResp).Marshall())
 	case "langchaingo":
-		panic("not implemented!")
-	case "linhoose":
-		panic("not implemented!")
+		w.WriteHeader(http.StatusOK)
+		w.Write(util.PrepareResponse(resp).Marshall())
+	case "lingoose":
+		w.WriteHeader(http.StatusOK)
+		w.Write(util.PrepareResponse(resp).Marshall())
 	}
 
 }

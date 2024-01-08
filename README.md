@@ -30,8 +30,15 @@ Example request:
 curl  'http://localhost:8996/api/v1/commit' \
 --header 'Content-Type: application/json' \
 --data '{
-    "message":"You are a developer and your responsible is fix the commit message. You can check the guidline here https://wiki.openstack.org/wiki/GitCommitMessages#Information_in_commit_messages. Can you fix '"$(cat "$1")""
+    "prompt":"You are a developer and your responsible is fix the commit message. You can check the guidline here https://wiki.openstack.org/wiki/GitCommitMessages#Information_in_commit_messages. Can you fix '"$(cat "$1")""
 }'
 
 ```
 
+For cli
+
+
+```bash
+go build -o bin/api cmd/main.go
+LLM_BACKEND="ollama" ./bin/api -p "Say hi" | jq .
+```

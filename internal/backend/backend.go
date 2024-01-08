@@ -1,6 +1,7 @@
 package backend
 
 import (
+	"git-observer/internal/backend/langchaingo"
 	"git-observer/internal/backend/lingoose"
 	"git-observer/internal/backend/ollama"
 	"git-observer/internal/config"
@@ -18,6 +19,6 @@ func Init() {
 	} else if config.AppConfig.Config.Api.Backend == "lingoose" {
 		BackendInstance = lingoose.New()
 	} else if config.AppConfig.Config.Api.Backend == "langchaingo" {
-		//BackendInstance = langchaingo.New()
+		BackendInstance = langchaingo.New()
 	}
 }
