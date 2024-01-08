@@ -1,6 +1,6 @@
 default: help
 
-PROJECT_NAME=git-observer
+PROJECT_NAME=llm-manager
 ARCH=arm64
 CLI_MAIN_FOLDER=./cmd
 BIN_FOLDER=bin

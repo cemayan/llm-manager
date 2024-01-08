@@ -9,9 +9,9 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o /app/git-observer  cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o /app/llm-manager  cmd/main.go
 
 FROM scratch
-COPY --from=builder /app/git-observer /app/git-observer
+COPY --from=builder /app/llm-manager /app/llm-manager
 EXPOSE 8996
-ENTRYPOINT ["/app/git-observer"]
+ENTRYPOINT ["/app/llm-manager"]

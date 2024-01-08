@@ -1,7 +1,7 @@
 apiVersion: skaffold/v4beta8
 kind: Config
 metadata:
-  name: git-observer
+  name: llm-manager
 build:
   artifacts:
     - image: build
