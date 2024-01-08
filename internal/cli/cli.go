@@ -3,10 +3,10 @@ package cli
 import (
 	"encoding/json"
 	"fmt"
-	"git-observer/api/types"
-	"git-observer/api/util"
-	"git-observer/internal/backend"
-	"git-observer/internal/config"
+	"llm-manager/api/types"
+	"llm-manager/api/util"
+	"llm-manager/internal/backend"
+	"llm-manager/internal/config"
 )
 
 func Exec(prompt string) {

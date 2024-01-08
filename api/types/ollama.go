@@ -17,6 +17,11 @@ type OllamaResponse struct {
 }
 
 func (or *OllamaRequest) Marshall() []byte {
-	marshal, _ := json.Marshal(or)
+	marshal, err := json.Marshal(or)
+
+	if err != nil {
+		return []byte("")
+	}
+
 	return marshal
 }

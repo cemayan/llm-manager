@@ -1,10 +1,10 @@
 package backend
 
 import (
-	"git-observer/internal/backend/langchaingo"
-	"git-observer/internal/backend/lingoose"
-	"git-observer/internal/backend/ollama"
-	"git-observer/internal/config"
+	"llm-manager/internal/backend/langchaingo"
+	"llm-manager/internal/backend/lingoose"
+	"llm-manager/internal/backend/ollama"
+	"llm-manager/internal/config"
 )
 
 var BackendInstance Backend

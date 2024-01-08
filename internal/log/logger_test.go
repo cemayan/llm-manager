@@ -1,9 +1,9 @@
 package log
 
 import (
-	"git-observer/internal/config"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
+	"llm-manager/internal/config"
 	"os"
 	"strconv"
 	"testing"

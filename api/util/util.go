@@ -1,7 +1,7 @@
 package util
 
 import (
-	"git-observer/api/types"
+	"llm-manager/api/types"
 )
 
 var errorMap map[int]string

@@ -1,8 +1,8 @@
 package commit
 
 import (
-	"git-observer/api/router"
-	"git-observer/internal/backend"
+	"llm-manager/api/router"
+	"llm-manager/internal/backend"
 	"net/http"
 )
 

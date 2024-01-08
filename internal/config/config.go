@@ -2,8 +2,8 @@ package config
 
 import (
 	"fmt"
-	"git-observer/internal/structs"
 	log "github.com/sirupsen/logrus"
+	"llm-manager/internal/structs"
 	"os"
 	"strconv"
 	"strings"

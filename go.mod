@@ -1,4 +1,4 @@
-module git-observer
+module llm-manager
 
 go 1.21
 

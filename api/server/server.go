@@ -3,12 +3,12 @@ package server
 import (
 	"context"
 	"fmt"
-	"git-observer/api/middleware"
-	"git-observer/api/router"
-	"git-observer/api/router/commit"
-	"git-observer/internal/config"
-	"git-observer/internal/log"
 	"github.com/gorilla/mux"
+	"llm-manager/api/middleware"
+	"llm-manager/api/router"
+	"llm-manager/api/router/commit"
+	"llm-manager/internal/config"
+	"llm-manager/internal/log"
 	"net/http"
 	"time"
 )

@@ -1,8 +1,8 @@
 package log
 
 import (
-	"git-observer/internal/config"
 	log "github.com/sirupsen/logrus"
+	"llm-manager/internal/config"
 )
 
 var LoggerInstance *Log

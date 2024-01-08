@@ -16,6 +16,11 @@ type Response struct {
 }
 
 func (r *Response) Marshall() []byte {
-	marshal, _ := json.Marshal(r)
+	marshal, err := json.Marshal(r)
+
+	if err != nil {
+		return []byte("")
+	}
+
 	return marshal
 }

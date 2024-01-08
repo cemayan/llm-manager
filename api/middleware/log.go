@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"git-observer/internal/log"
+	"llm-manager/internal/log"
 	"net/http"
 )
 

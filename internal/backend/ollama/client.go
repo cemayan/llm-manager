@@ -2,8 +2,8 @@ package ollama
 
 import (
 	"bytes"
-	"git-observer/internal/config"
 	"io"
+	"llm-manager/internal/config"
 	"net/http"
 )
 
