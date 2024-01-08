@@ -48,7 +48,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	cli.Exec(prompt)
+	if prompt != "" {
+		cli.Exec(prompt)
+		return
+	}
 
 	server.HttpServer.ConfigureMux()
 

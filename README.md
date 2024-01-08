@@ -1,9 +1,9 @@
-## git observer
+## llm-manager
 
 
 ### Introduction
 
-git-observer allows editing commit messages on Git via LLM models and git hooks when developer wants to commit.
+llm-manager allows editing commit messages on Git via LLM models and git hooks when developer wants to commit.
 
 There are 3 LLM backends available:
 - langchaingo (openai)
