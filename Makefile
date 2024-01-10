@@ -1,7 +1,7 @@
 default: help
 
 PROJECT_NAME=llm-manager
-ARCH=arm64
+ARCH=amd64
 CLI_MAIN_FOLDER=./cmd
 BIN_FOLDER=bin
 BIN_FOLDER_MACOS=${BIN_FOLDER}/${ARCH}/darwin
@@ -27,7 +27,7 @@ compile-windows: fmt test build-windows
 compile-linux: fmt test build-linux
 
 ## compile-alpine: compiles project for alpine-scratch
-compile-alpine-scratch: fmt test build-linux
+compile-alpine-scratch: fmt test build-alpine-scratch
 
 skaffold-dev:
 	@echo "  >  Building binary for MacOS"
