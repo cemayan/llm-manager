@@ -2,6 +2,8 @@ package util
 
 import (
 	"llm-manager/api/types"
+	"llm-manager/internal/config"
+	"llm-manager/internal/structs"
 )
 
 var errorMap map[int]string
@@ -22,11 +24,24 @@ func PrepareOllamaRequest(model string, commitMessage string) *types.OllamaReque
 	}
 }
 
-func PrepareResponse(data interface{}) *types.Response {
-	resp := types.Response{
-		Data: data,
+func PrepareResponse(data interface{}) []byte {
+
+	switch config.AppConfig.Config.Api.Output {
+	case structs.Text:
+		if val, ok := data.(types.OllamaResponse); ok {
+			return []byte(val.Response)
+		}
+
+	case structs.Json:
+		resp := types.Response{
+			Data: data,
+		}
+		return resp.Marshall()
+	case structs.Yaml:
+		return nil
 	}
-	return &resp
+
+	return nil
 }
 
 func PrepareErrorResponse(err error, code int) *types.Response {

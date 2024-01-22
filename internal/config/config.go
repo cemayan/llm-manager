@@ -26,6 +26,16 @@ func configureParameters() *structs.Config {
 		log.Fatalln("LLM_BACKEND must be set!")
 	}
 
+	if val, ok := os.LookupEnv("BACKEND_OUTPUT"); ok {
+		if v, _ok := structs.OutputMap[val]; _ok {
+			cfg.Api.Output = v
+		} else {
+			log.Fatalln("output not found!")
+		}
+	} else {
+		cfg.Api.Output = structs.Json
+	}
+
 	if val, ok := os.LookupEnv("BACKEND_ENV"); ok {
 		cfg.Environment = val
 	} else {

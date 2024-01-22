@@ -12,6 +12,7 @@ type ConfigTestSuite struct {
 }
 
 func (suite *ConfigTestSuite) SetupSuite() {
+	os.Setenv("LLM_BACKEND", "ollama")
 	New()
 }
 

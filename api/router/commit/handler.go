@@ -62,13 +62,13 @@ func (h *handler) QueryHandler(w http.ResponseWriter, r *http.Request) {
 		ollamaResp.Response = re.ReplaceAllString(ollamaResp.Response, "")
 
 		w.WriteHeader(http.StatusOK)
-		w.Write(util.PrepareResponse(ollamaResp).Marshall())
+		w.Write(util.PrepareResponse(ollamaResp))
 	case "langchaingo":
 		w.WriteHeader(http.StatusOK)
-		w.Write(util.PrepareResponse(resp).Marshall())
+		w.Write(util.PrepareResponse(resp))
 	case "lingoose":
 		w.WriteHeader(http.StatusOK)
-		w.Write(util.PrepareResponse(resp).Marshall())
+		w.Write(util.PrepareResponse(resp))
 	}
 
 }

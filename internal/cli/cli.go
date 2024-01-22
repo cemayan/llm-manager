@@ -7,6 +7,7 @@ import (
 	"llm-manager/api/util"
 	"llm-manager/internal/backend"
 	"llm-manager/internal/config"
+	"regexp"
 )
 
 func Exec(prompt string) error {
@@ -23,12 +24,15 @@ func Exec(prompt string) error {
 		var ollamaResp types.OllamaResponse
 		err = json.Unmarshal(query, &ollamaResp)
 
+		re := regexp.MustCompile(`\r?\n`)
+		ollamaResp.Response = re.ReplaceAllString(ollamaResp.Response, "")
+
 		if err != nil {
 			fmt.Println(string(util.PrepareErrorResponse(err, 1001).Marshall()))
 			return err
 		}
 
-		fmt.Println(string(util.PrepareResponse(ollamaResp.Response).Marshall()))
+		fmt.Println(string(util.PrepareResponse(ollamaResp)))
 	case "lingoose":
 		query, err := backend.BackendInstance.
 			Query([]byte(prompt), nil)
@@ -37,7 +41,7 @@ func Exec(prompt string) error {
 			return err
 		}
 
-		fmt.Println(string(util.PrepareResponse(query).Marshall()))
+		fmt.Println(string(util.PrepareResponse(query)))
 	case "langchaingo":
 		query, err := backend.BackendInstance.
 			Query([]byte(prompt), nil)
@@ -46,7 +50,7 @@ func Exec(prompt string) error {
 			return err
 		}
 
-		fmt.Println(string(util.PrepareResponse(query).Marshall()))
+		fmt.Println(string(util.PrepareResponse(query)))
 	}
 
 	return nil

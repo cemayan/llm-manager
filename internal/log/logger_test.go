@@ -15,6 +15,7 @@ type LoggerTestSuite struct {
 
 func (suite *LoggerTestSuite) SetupSuite() {
 	os.Setenv("BACKEND_ENV", "development")
+	os.Setenv("LLM_BACKEND", "ollama")
 	config.New()
 	New()
 }
@@ -25,6 +26,7 @@ func TestLoggerTestSuite(t *testing.T) {
 
 func (suite *LoggerTestSuite) Test_Level() {
 	os.Setenv("BACKEND_LOG_LEVEL", strconv.Itoa(3))
+	os.Setenv("LLM_BACKEND", "ollama")
 	config.New()
 	New()
 	suite.Equal(logrus.WarnLevel, LoggerInstance.Logger.GetLevel())
@@ -32,6 +34,7 @@ func (suite *LoggerTestSuite) Test_Level() {
 
 func (suite *LoggerTestSuite) Test_Env() {
 	os.Setenv("BACKEND_ENV", "production")
+	os.Setenv("LLM_BACKEND", "ollama")
 	config.New()
 	New()
 	suite.Equal(&logrus.JSONFormatter{}, LoggerInstance.Logger.Formatter)
@@ -39,6 +42,7 @@ func (suite *LoggerTestSuite) Test_Env() {
 
 func (suite *LoggerTestSuite) Test_Env2() {
 	os.Setenv("BACKEND_ENV", "development")
+	os.Setenv("LLM_BACKEND", "ollama")
 	config.New()
 	New()
 	suite.Equal(&logrus.TextFormatter{}, LoggerInstance.Logger.Formatter)

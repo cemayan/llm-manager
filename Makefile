@@ -1,7 +1,7 @@
 default: help
 
 PROJECT_NAME=llm-manager
-ARCH=amd64
+ARCH=$(arch)
 CLI_MAIN_FOLDER=./cmd
 BIN_FOLDER=bin
 BIN_FOLDER_MACOS=${BIN_FOLDER}/${ARCH}/darwin
