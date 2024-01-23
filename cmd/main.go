@@ -37,8 +37,8 @@ func init() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "git-observer",
-	Short: "git-observer",
+	Use:   "llm-manager",
+	Short: "llm-manager",
 	Run: func(cmd *cobra.Command, args []string) {
 
 	},
