@@ -10,6 +10,7 @@ import (
 	"llm-manager/internal/cli"
 	"llm-manager/internal/config"
 	"llm-manager/internal/log"
+	"llm-manager/internal/structs"
 	"net/http"
 	"os"
 	"os/signal"
@@ -19,6 +20,7 @@ import (
 
 var llmBackend string
 var prompt string
+var output string
 
 func init() {
 
@@ -28,6 +30,7 @@ func init() {
 	cobra.OnInitialize()
 	rootCmd.PersistentFlags().StringVarP(&llmBackend, "backend", "b", "", "backend")
 	rootCmd.PersistentFlags().StringVarP(&prompt, "prompt", "p", "", "prompt")
+	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "", "output")
 
 	server.New()
 	backend.Init()
@@ -46,6 +49,12 @@ func main() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+	}
+
+	if output != "" {
+		if v, _ok := structs.OutputMap[output]; _ok {
+			config.AppConfig.Config.Api.Output = v
+		}
 	}
 
 	if prompt != "" {
