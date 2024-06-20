@@ -14,6 +14,8 @@ type handler struct {
 	backend backend.Backend
 }
 
+// QueryHandler handles the incoming request
+// According to given backend it will be redirected to selected backend
 func (h *handler) QueryHandler(w http.ResponseWriter, r *http.Request) {
 
 	var payload types.CommitPayload

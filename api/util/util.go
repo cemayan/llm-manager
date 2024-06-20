@@ -6,6 +6,7 @@ import (
 	"llm-manager/internal/structs"
 )
 
+// errorMap contains common error of app
 var errorMap map[int]string
 
 func init() {
@@ -17,6 +18,7 @@ func init() {
 	errorMap[1003] = "SERVER_ERROR"
 }
 
+// PrepareOllamaRequest creates a types.OllamaRequest
 func PrepareOllamaRequest(model string, commitMessage string) *types.OllamaRequest {
 	return &types.OllamaRequest{
 		Model:  model,
@@ -24,6 +26,7 @@ func PrepareOllamaRequest(model string, commitMessage string) *types.OllamaReque
 	}
 }
 
+// PrepareResponse returns a []byte according to given data and output type
 func PrepareResponse(data interface{}) []byte {
 
 	switch config.AppConfig.Config.Api.Output {
@@ -44,6 +47,7 @@ func PrepareResponse(data interface{}) []byte {
 	return nil
 }
 
+// PrepareErrorResponse returns *types.Response
 func PrepareErrorResponse(err error, code int) *types.Response {
 	resp := types.Response{
 		Error: &types.Error{NativeErr: err.Error(), Code: code, ErrGroup: errorMap[code]},

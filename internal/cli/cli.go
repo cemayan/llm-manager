@@ -10,6 +10,7 @@ import (
 	"regexp"
 )
 
+// Exec executes the request according to the given prompt
 func Exec(prompt string) error {
 
 	switch config.AppConfig.Config.Api.Backend {

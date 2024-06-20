@@ -13,6 +13,8 @@ type Lingoose struct {
 	openAI *openai.OpenAI
 }
 
+// Query returns response according to the given prompt
+// StopWords can be set
 func (l Lingoose) Query(body []byte, params map[string]interface{}) ([]byte, error) {
 	l.ConfigureParams(params)
 	l.openAI.SetStop(l.StopWords)
@@ -28,6 +30,9 @@ func (l Lingoose) Query(body []byte, params map[string]interface{}) ([]byte, err
 	return []byte(response), err
 }
 
+// New returns Lingoose client
+// Default values are like below:
+// TODO: model, temprature and maxTokens can be changed by os environment
 func New() *Lingoose {
 	llmOpenAI := openai.New(
 		openai.GPT3Dot5Turbo,

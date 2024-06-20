@@ -7,12 +7,15 @@ import (
 	"llm-manager/internal/config"
 )
 
+// BackendInstance is used to reach selected backend whenever what you want
 var BackendInstance Backend
 
 type Backend interface {
 	Query(body []byte, params map[string]interface{}) ([]byte, error)
 }
 
+// Init initializes according to given backend
+// All backends should be implemented the Backend interface
 func Init() {
 	if config.AppConfig.Config.Api.Backend == "ollama" {
 		BackendInstance = ollama.New()

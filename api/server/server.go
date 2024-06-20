@@ -13,6 +13,7 @@ import (
 	"time"
 )
 
+// HttpServer is used to react Server instance whenever what you want
 var HttpServer *Server
 
 type Server struct {
@@ -22,6 +23,8 @@ type Server struct {
 	router     *mux.Router
 }
 
+// Listen listens and serves
+// If cert and key are given tls server will be started.
 func (s *Server) Listen() error {
 	var err error
 	appConfig := config.AppConfig.Config
@@ -43,12 +46,14 @@ func (s *Server) Shutdown(ctx context.Context) error {
 	return nil
 }
 
+// configureHealthRoute sets a function for handling to "health" requests
 func (s *Server) configureHealthRoute() {
 	s.router.HandleFunc("/health", func(writer http.ResponseWriter, request *http.Request) {
 		writer.WriteHeader(http.StatusOK)
 	})
 }
 
+// configureAPIRoutes sets a function for handling to "api" requests
 func (s *Server) configureAPIRoutes() {
 	//api routers
 	routers := []router.Router{
@@ -63,6 +68,7 @@ func (s *Server) configureAPIRoutes() {
 	}
 }
 
+// ConfigureMux configures routes and middlewares
 func (s *Server) ConfigureMux() {
 	s.router = mux.NewRouter()
 
@@ -74,6 +80,7 @@ func (s *Server) ConfigureMux() {
 	s.server.Handler = s.router
 }
 
+// New creates a HttpServer struct
 func New() {
 
 	server := &http.Server{

@@ -12,6 +12,7 @@ type Langchaingo struct {
 	llm *openAi2.LLM
 }
 
+// Query returns response according to the given prompt
 func (l Langchaingo) Query(body []byte, params map[string]interface{}) ([]byte, error) {
 	ctx := context.Background()
 	l.ConfigureParams(params)
@@ -23,6 +24,7 @@ func (l Langchaingo) Query(body []byte, params map[string]interface{}) ([]byte, 
 	return []byte(completion), err
 }
 
+// New returns Langchaingo client
 func New() *Langchaingo {
 	llm, _ := openAi2.New()
 	return &Langchaingo{llm: llm}

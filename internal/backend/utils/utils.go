@@ -5,6 +5,7 @@ type CommonParams struct {
 	StopWords []string
 }
 
+// ConfigureParams configures some params such as stopWords and temp
 func (c *CommonParams) ConfigureParams(params map[string]interface{}) {
 
 	if val, ok := params["stopWords"]; ok {
@@ -18,6 +19,6 @@ func (c *CommonParams) ConfigureParams(params map[string]interface{}) {
 			c.Temp = val2
 		}
 	} else {
-		c.Temp = 0.8
+		c.Temp = 0.8 // default temp
 	}
 }

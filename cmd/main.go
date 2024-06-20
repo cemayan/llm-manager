@@ -18,21 +18,23 @@ import (
 	"time"
 )
 
-var llmBackend string
 var prompt string
 var output string
 
 func init() {
 
+	// config initializer
 	config.New()
+	// logrus initializer
 	log.New()
 
 	cobra.OnInitialize()
-	rootCmd.PersistentFlags().StringVarP(&llmBackend, "backend", "b", "", "backend")
-	rootCmd.PersistentFlags().StringVarP(&prompt, "prompt", "p", "", "prompt")
-	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "", "output")
+	rootCmd.PersistentFlags().StringVarP(&prompt, "prompt", "p", "", "prompt for llm backend")
+	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "", "output to file(json,text)")
 
+	// server initializer
 	server.New()
+	// backend initializer
 	backend.Init()
 }
 
@@ -51,12 +53,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	// If output is not empty output will be set to output type
 	if output != "" {
 		if v, _ok := structs.OutputMap[output]; _ok {
 			config.AppConfig.Config.Api.Output = v
 		}
 	}
 
+	// If prompt is not empty it means app runs by cli
 	if prompt != "" {
 		cli.Exec(prompt)
 		return

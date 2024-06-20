@@ -21,6 +21,8 @@ func CreateRoute(method string, path string, handlerFunc HandlerFunc) Route {
 	return NewRoute(method, path, handlerFunc)
 }
 
+// NewRoute returns Route
+// 3 methods need to be implemented
 func NewRoute(method string, path string, handlerFunc HandlerFunc) Route {
 	return &baseRoute{method: method, path: path, handlerFunc: handlerFunc}
 }
