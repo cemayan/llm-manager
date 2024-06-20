@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  llm-manager:
+    build:
+      context: ../
+      dockerfile: build/Dockerfile
+    container_name: llm-manager
+    environment:
+      - LLM_BACKEND=ollama
+      - OLLAMA_MODEL="llama3"
+    ports:
+      - '8996:8996'
+    restart: always
